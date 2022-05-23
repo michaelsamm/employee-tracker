@@ -435,7 +435,6 @@ const changeEmpRole = () => {
     db.query(rolesSql, (err, rows) => {
         if (err) throw err;
         const roles = rows.map(({ title, id}) => ({ name: title, value: id }));
-        console.log(roles);
 
         const empsql = `SELECT CONCAT(first_name, ' ', last_name) AS staff, id FROM employee`;
         db.query(empsql, (err, rows) => {
@@ -458,7 +457,6 @@ const changeEmpRole = () => {
                 ])
                 .then(({emp, newrole}) => {
                     const updatesql = `UPDATE employee SET role_id = ? WHERE id = ?`;
-                    console.log(newrole);
 
                     const params = [newrole, emp];
                     db.query(updatesql, params, (err, res) => {
